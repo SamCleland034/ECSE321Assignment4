@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: app.CompApp
+Class-Path: ECSE321Assignment4.jar
+

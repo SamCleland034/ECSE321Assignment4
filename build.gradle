@@ -19,7 +19,6 @@ apply plugin: 'eclipse'
 
 
 group = 'ca.mcgill.ecse321.assignment4'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 
@@ -35,19 +34,46 @@ configurations {
 dependencies {
 		
 	  compile 'org.jdesktop:appframework:1.0.3'
-	testCompile group: 'junit', name: 'junit', version: '4.12'
+	testCompile group: 'junit', name: 'junit', version: '4.+'
 	
 
 
 	
 
 }
+
 task compile(type: JavaCompile){
-	 source = fileTree(dir: 'src', include: 'CompApp.java')
-    include 'computation/Computation.java'
-    include 'view/ComputationPage.java'
-    classpath = files('build/classes/main')
-    destinationDir = file("${buildDir}/dependency-cache")
+	
+	//classpath = files('src/main/java')
+	
+	//source = fileTree(dir: 'src', include: '/app/CompApp.java')
+	//include '/computation/Computation.java'
+   //include '/view/ComputationPage.java'
+  // include 'src/main/java/test/AllTests.java'
+   //include 'src/main/java/test/ComputationTestAddSubtract.java'
+   //   include 'src/main/java/test/ComputationTestDivideMultiply.java'
+   
+  
+   // classpath = files('build/classes/main')
+  // destinationDir = file("${buildDir}/dependency-cache")
+   dependsOn compileJava
+   dependsOn compileTestJava
+   
+  
+    
+}	
+task run(type: JavaExec){
+	dependsOn compile
+	classpath =sourceSets.main.runtimeClasspath
+  	main = "app.CompApp"
+}
+jar {
+	
+	destinationDir= new File('Computation/distributable')
+		manifest {
+        attributes 'Main-Class': 'app.CompApp',
+                   'Class-Path': 'ECSE321Assignment4.jar'
+    }
 }
 uploadArchives {
     repositories {

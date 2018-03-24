@@ -1,12 +1,12 @@
-package ca.mcgill.ecse321.assignment4.test;
+package test;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+
 import computation.Computation;
-
-
 public class ComputationTestAddSubstract {
 	
 	Computation computation;
